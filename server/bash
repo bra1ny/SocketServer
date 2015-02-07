@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Illusion ls(LS) begins
+ls__fileList=$(ls .)
+# Illusion ls(LS) ends
+# Illusion for_each(FOR_EACH) begins
+for for_each__iterator in ${ls__fileList}; do
+    # Illusion t464622253(PRINTF) begins
+    printf "There is a file: "
+    # Illusion t464622253(PRINTF) ends
+    # Illusion t464622254(ECHO) begins
+    echo "${for_each__iterator}"
+    # Illusion t464622254(ECHO) ends
+done;
+# Illusion for_each(FOR_EACH) ends

@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Reset Game</title>
+    <style>
+      
+    </style>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='http://code.jquery.com/jquery-1.11.1.js'></script>  
+  </head>
+  <body>
+    
+    <button id='compile'> <h2> compile <h2></button>
+    <form id='download' action="bash">
+      <button type="submit"><h2> download <h2></button>
+    </form>
+
+    <script>
+      var server = io();
+      $('#compile').on('click', function(){
+        server.emit('compile',{
+  "illusion": {
+    "LS": {
+      "input": [
+        "path"
+      ],
+      "sub": null,
+      "output": [
+        "fileList"
+      ],
+      "bash": "_var(fileList)=$(ls _input(path))"
+    },
+    "FOR_EACH": {
+      "input": [
+        "list"
+      ],
+      "sub": {
+        "body": "iterator"
+      },
+      "bash": "for _var(iterator) in _input(list); do\n    _sub(body)done;"
+    },
+    "PRINTF": {
+      "input": [
+        "content"
+      ],
+      "sub": "null",
+      "output": [],
+      "bash": "printf \"_input(content)\""
+    },
+    "ECHO": {
+      "input": [
+        "content"
+      ],
+      "sub": null,
+      "output": [],
+      "bash": "echo \"_input(content)\""
+    }
+  },
+  "janish": [
+    {
+      "id": "ls",
+      "illusion": "LS",
+      "input": {
+        "path": "."
+      }
+    },
+    {
+      "id": "for_each",
+      "illusion": "FOR_EACH",
+      "input": {
+        "list": "#ls.fileList"
+      },
+      "sub": {
+        "body": [
+          {
+            "id": "t464622253",
+            "illusion": "PRINTF",
+            "input": {
+              "content": "There is a file: "
+            }
+          },
+          {
+            "id": "t464622254",
+            "illusion": "ECHO",
+            "input": {
+              "content": "#for_each.iterator"
+            }
+          }
+        ]
+      }
+    }
+  ]
+});
+      });
+
+      // $('#download').on('click', function(){
+      //   server.emit('download');
+      // });
+
+    </script>
+  </body>
+</html>

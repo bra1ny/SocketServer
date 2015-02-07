@@ -1,0 +1,4 @@
+string : GOOGLE_SEARCH_URL ("Hello World!");
+echo : ECHO (string.url);
+search : GOOGLE_SEARCH (string.url);
+result : ECHO (search.result);
