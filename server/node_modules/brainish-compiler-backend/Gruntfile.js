@@ -3,7 +3,16 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: ['jsh/', 'jsh_test'],
+    clean: ['jsh/', 'jsh_test/', 'example/log/'],
+    copy: {
+      main: {
+        expand: true,
+        cwd: 'init',
+        src: ['**/*'],
+        dest: 'example/',
+        filter: 'isFile'
+      }
+    },
     jison: {
       target: {
         files: {
@@ -33,10 +42,11 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-jison');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  grunt.registerTask('default', ['clean', 'jison', 'coffee']);
-  grunt.registerTask('test', ['clean', 'jison', 'coffee', 'nodeunit']);
+  grunt.registerTask('default', ['clean', 'copy', 'jison', 'coffee']);
+  grunt.registerTask('test', ['clean', 'copy', 'jison', 'coffee', 'nodeunit']);
 }

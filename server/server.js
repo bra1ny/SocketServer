@@ -6,9 +6,7 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
+app.use(require('express').static(__dirname + '/html'));
 
 app.get('/bash', function(req, res){
   res.sendFile(__dirname + '/bash');

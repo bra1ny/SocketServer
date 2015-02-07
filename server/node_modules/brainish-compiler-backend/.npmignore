@@ -28,3 +28,4 @@ node_modules
 jsh_test
 test/*
 !test/*_test.coffee
+example/log/*
